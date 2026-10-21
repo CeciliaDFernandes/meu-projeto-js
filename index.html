@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Avaliação JS</title>
+</head>
+<body>
+  <h1>Abra o console (F12) para ver os resultados</h1>
+  <script>
+    // ==========================================
+    // 1) Avaliação de Risco de Crédito
+    // ==========================================
+    function avaliarRiscoDeCredito(rendaMensal, dividaAtual) {
+      const renda = parseFloat(rendaMensal);
+      const divida = parseFloat(dividaAtual);
+      const TE = (divida / renda) * 100;
+
+      if (TE < 10) {
+        return "Risco Baixo";
+      } else if (TE >= 10 && TE < 30) {
+        return "Risco Moderado";
+      } else {
+        return "Risco Alto";
+      }
+    }
+
+    // No navegador usamos prompt() no lugar de prompt-sync/readline
+    const rendaInput = prompt("Informe sua renda mensal (R$):");
+    const dividaInput = prompt("Informe sua dívida atual (R$):");
+
+    const resultadoRisco = avaliarRiscoDeCredito(rendaInput, dividaInput);
+    console.log(`Renda: R$ ${rendaInput} | Dívida: R$ ${dividaInput}`);
+    console.log(`Classificação: ${resultadoRisco}`);
+
+    // ==========================================
+    // 2) Manipulação de array
+    // ==========================================
+    const numeros = [];
+    let entrada = prompt("Digite números separados por vírgula (ex: 3,7,10,2):");
+    if (entrada) {
+      entrada.split(",").forEach(n => {
+        const num = parseFloat(n.trim());
+        if (!isNaN(num)) numeros.push(num);
+      });
+    }
+
+    if (numeros.length > 0) {
+      console.log("Array original:", numeros);
+      console.log(`Maior valor: ${Math.max(...numeros)}`);
+      console.log(`Menor valor: ${Math.min(...numeros)}`);
+
+      const dobro = numeros.map(n => n * 2);
+      console.log("Dobro de cada número:", dobro);
+
+      const maioresQue5 = numeros.filter(n => n > 5);
+      console.log("Números maiores que 5:", maioresQue5);
+    } else {
+      console.log("Nenhum número válido foi informado.");
+    }
+
+    // ==========================================
+    // 3) Criação e manipulação de objeto
+    // ==========================================
+    const carro = {
+      marca: "Toyota",
+      modelo: "Corolla",
+      ano: 2020,
+      exibirInfo() {
+        console.log(`Marca: ${this.marca} | Modelo: ${this.modelo} | Ano: ${this.ano}`);
+      }
+    };
+
+    carro.exibirInfo();
+
+    carro.cor = "Preto";
+    carro.ano = 2025;
+
+    console.log("Objeto carro completo:", carro);
+
+    // ==========================================
+    // 4) Orientação a Objetos (opcional)
+    // ==========================================
+    class Livro {
+      constructor(titulo, autor, ano) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.ano = ano;
+      }
+      detalhes() {
+        console.log(`Livro: ${this.titulo} | Autor: ${this.autor} | Ano: ${this.ano}`);
+      }
+    }
+
+    const livro1 = new Livro("Dom Casmurro", "Machado de Assis", 1899);
+    const livro2 = new Livro("1984", "George Orwell", 1949);
+
+    livro1.detalhes();
+    livro2.detalhes();
+
+    // ==========================================
+    // 5) Laços, condicionais e manipulação de string
+    // ==========================================
+    const palavra = prompt("Digite uma palavra:");
+
+    if (palavra) {
+      console.log(`Palavra: ${palavra}`);
+      console.log(`Quantidade de caracteres: ${palavra.length}`);
+
+      const invertida = palavra.split("").reverse().join("");
+      const normalizada = palavra.toLowerCase();
+      const invertidaNormalizada = invertida.toLowerCase();
+
+      if (normalizada === invertidaNormalizada) {
+        console.log(`"${palavra}" É um palíndromo.`);
+      } else {
+        console.log(`"${palavra}" NÃO é um palíndromo.`);
+      }
+    }
+  </script>
+</body>
+</html>
